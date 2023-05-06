@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  traefik:
+    image: "traefik/whoami"
+    container_name: whoami
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami-insecure.entrypoints=web"
+      - "traefik.http.routers.whoami-insecure.rule=Host(`whoami.localhost`)"
+      # HTTPS Redirect
+      # - "traefik.http.routers.whoami-insecure.middlewares=force-secure"
+      # - "traefik.http.middlewares.force-secure.redirectscheme.scheme=https"
+      # - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      # - "traefik.http.routers.whoami.tls.certresolver=LetsEncrypt"
+    networks:
+      - traefiknet
+
+networks:
+  traefiknet:
+    name: traefiknet

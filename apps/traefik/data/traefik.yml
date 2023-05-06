@@ -1,0 +1,24 @@
+api:
+  insecure: true
+  dashboard: true
+
+certificatesResolvers:
+  LetsEncrypt:
+    acme:
+      httpChallenge:
+        entryPoint: web
+      email: "admin@example.com"
+      storage: "/letsencrypt/acme.json"
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+log:
+  level: ERROR
+
+providers:
+  docker:
+    exposedByDefault: false
